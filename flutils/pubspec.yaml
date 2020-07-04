@@ -1,8 +1,6 @@
 name: flutils
-description:
-  - Flutter common utilities for forms, controlles, futures, stream and more.
+description: Flutter common utilities for forms, controlles, futures, stream and more.
 version: 0.1.0
-author: Frank Moreno <frankmoreno1993@gmail.com>
 homepage: https://github.com/kranfix/dart_utils/tree/master/flutils
 
 environment:
