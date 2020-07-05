@@ -27,7 +27,8 @@ class MyHomePage extends StatelessWidget {
   Future<int> fetchNumber() async {
     final random = Random(3434);
     await Future.delayed(Duration(seconds: 5));
-    return random.nextInt(34);
+    //return random.nextInt(34);
+    throw Exception('Forced error');
   }
 
   @override
@@ -59,7 +60,7 @@ class MyHomePage extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                'error:${snapshot.error}',
+                'error: ${snapshot.error}',
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
