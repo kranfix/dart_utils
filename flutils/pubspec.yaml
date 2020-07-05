@@ -1,6 +1,6 @@
 name: flutils
 description: Flutter common utilities for forms, controlles, futures, stream and more.
-version: 0.1.0
+version: 0.2.0
 homepage: https://github.com/kranfix/dart_utils/tree/master/flutils
 
 environment:
@@ -14,10 +14,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   pedantic: ^1.9.0
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
 
-# The following section is specific to Flutter.
 flutter:
   # To add assets to your package, add an assets section, like this:
   # assets:
