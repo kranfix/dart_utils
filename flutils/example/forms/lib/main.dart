@@ -31,18 +31,40 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: PasswordExample(),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          bottom: TabBar(tabs: [
+            Tab(
+              child: Text('Empty'),
+            ),
+            Tab(
+              child: Text('Initilized'),
+            ),
+          ]),
+        ),
+        body: TabBarView(children: [
+          Center(
+            child: PasswordExample(),
+          ),
+          Center(
+            child: PasswordExample(initialPassword: 'password'),
+          ),
+        ]),
       ),
     );
   }
 }
 
 class PasswordExample extends StatefulWidget {
+  PasswordExample({Key key, String initialPassword = ''})
+      : initialPassword = initialPassword ?? '',
+        super(key: key);
+
+  final String initialPassword;
+
   @override
   _PasswordExampleState createState() => _PasswordExampleState();
 }
@@ -53,13 +75,13 @@ class _PasswordExampleState extends State<PasswordExample> {
   @override
   void initState() {
     super.initState();
-    _controller = PasswordEditingController();
+    _controller = PasswordEditingController(text: widget.initialPassword);
     _controller.addListener(() => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
-    const style = TextStyle(fontSize: 30);
+    const style = TextStyle(fontSize: 20);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
