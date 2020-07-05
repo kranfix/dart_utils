@@ -1,3 +1,5 @@
+import 'dart:math';
+import 'package:flutils/flutils.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,48 +20,61 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  Future<int> fetchNumber() async {
+    final random = Random(3434);
+    await Future.delayed(Duration(seconds: 5));
+    //return random.nextInt(34);
+    throw Exception('Forced error');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: FutureCreateBuilder<int>(
+          create: fetchNumber,
+          initialData: 23,
+          builder: (_, snapshot) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                'data: ${snapshot.data}',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              Text(
+                'hasData: ${snapshot.hasData}',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              Text(
+                'hasError: ${snapshot.hasError}',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              Text(
+                'error: ${snapshot.error}',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              Text(
+                '${snapshot.connectionState}',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              if (snapshot.connectionState == ConnectionState.waiting)
+                SizedBox.fromSize(
+                  size: Size.square(30),
+                  child: CircularProgressIndicator(),
+                )
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
