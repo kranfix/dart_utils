@@ -6,8 +6,9 @@ class FutureCreateBuilder<T> extends StatefulWidget {
     Key key,
     @required this.create,
     this.initialData,
-    this.builder,
+    @required this.builder,
   })  : assert(create != null),
+        assert(builder != null),
         super(key: key);
 
   /// Creates a Future<T>
