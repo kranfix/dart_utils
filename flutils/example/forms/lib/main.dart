@@ -1,11 +1,15 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutils/flutils.dart';
+import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,18 +18,18 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({required this.title, super.key});
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -36,41 +40,43 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          bottom: TabBar(tabs: [
-            Tab(
-              child: Text('Empty'),
-            ),
-            Tab(
-              child: Text('Initilized'),
-            ),
-          ]),
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                child: Text('Empty'),
+              ),
+              Tab(
+                child: Text('Initilized'),
+              ),
+            ],
+          ),
         ),
-        body: TabBarView(children: [
-          Center(
-            child: PasswordExample(),
-          ),
-          Center(
-            child: PasswordExample(initialPassword: 'password'),
-          ),
-        ]),
+        body: const TabBarView(
+          children: [
+            Center(
+              child: PasswordExample(),
+            ),
+            Center(
+              child: PasswordExample(initialPassword: 'password'),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 class PasswordExample extends StatefulWidget {
-  PasswordExample({Key key, String initialPassword = ''})
-      : initialPassword = initialPassword ?? '',
-        super(key: key);
+  const PasswordExample({super.key, this.initialPassword = ''});
 
   final String initialPassword;
 
   @override
-  _PasswordExampleState createState() => _PasswordExampleState();
+  State<PasswordExample> createState() => _PasswordExampleState();
 }
 
 class _PasswordExampleState extends State<PasswordExample> {
-  PasswordEditingController _controller;
+  late PasswordEditingController _controller;
 
   @override
   void initState() {
@@ -91,9 +97,11 @@ class _PasswordExampleState extends State<PasswordExample> {
             obscureText: _controller.obscureText,
             decoration: InputDecoration(
               suffixIcon: IconButton(
-                icon: Icon(_controller.showText
-                    ? Icons.visibility
-                    : Icons.visibility_off),
+                icon: Icon(
+                  _controller.showText
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                ),
                 onPressed: _controller.toggleShowText,
               ),
               hintText: 'Enter a password',
@@ -102,10 +110,10 @@ class _PasswordExampleState extends State<PasswordExample> {
           SizedBox(
             height: 30,
             child: _controller.wasSelected
-                ? Text('Password must be not empty', style: style)
+                ? const Text('Password must be not empty', style: style)
                 : null,
           ),
-          Text('${_controller.text}', style: style),
+          Text(_controller.text, style: style),
           Text('Is Edited? ${_controller.isEdited}', style: style),
           Text('Is not edited? ${_controller.isNotEdited}', style: style),
           Text('Was selected? ${_controller.wasSelected}', style: style),

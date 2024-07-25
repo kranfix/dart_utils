@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutils/flutils.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Selection and Edition for empty text', () {
@@ -54,7 +54,7 @@ void main() {
     });
 
     test('edits for first time', () {
-      final newPassword = '${password}a';
+      const newPassword = '${password}a';
       controller.text = newPassword;
       expect(controller.text, equals(newPassword));
       expect(controller.wasSelected, equals(true));

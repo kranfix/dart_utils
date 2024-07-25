@@ -1,4 +1,5 @@
+/// A collecion of utils for Flutter
 library flutils;
 
-export 'src/forms/forms.dart';
 export 'src/async/async.dart';
+export 'src/forms/forms.dart';
